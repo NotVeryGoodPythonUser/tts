@@ -12,7 +12,7 @@ with open("preparation/convert_data.json", "r", encoding="utf8") as json_data_fi
     NUM_CONVERT_DICT = data["number dict"]
 
 
-def ToSupported(text):
+def tosupported(text):
     text = text.lower()
     new_text = ""
     for char in text:
@@ -22,15 +22,16 @@ def ToSupported(text):
             new_text += NUM_CONVERT_DICT[char]
         elif char in [",", ".", "!", "?"]:
             new_text += "_"
-    return(new_text)
+    return new_text
 
-def GraphemsToPhonems(text):
+
+def graphemstophonems(text):
     # special rules
     idx = 0
     new_text = ""
     while idx < len(text):
-        if text[idx:idx+2] in REPLACING_TWO_CHAR:
-            new_text += REPLACING_TWO_CHAR[text[idx:idx+2]]
+        if text[idx:idx + 2] in REPLACING_TWO_CHAR:
+            new_text += REPLACING_TWO_CHAR[text[idx:idx + 2]]
             idx += 2
         elif text[idx] in REPLACING_SINGLE_CHAR:
             new_text += REPLACING_SINGLE_CHAR[text[idx]]
@@ -39,11 +40,11 @@ def GraphemsToPhonems(text):
             new_text += text[idx]
             idx += 1
     text = new_text
-    #spodoba znělosti
+    # spodoba znělosti
     new_text = ""
     consonant_group = ""
     for char in text:
-        if char in VOICED+VOICELESS:
+        if char in VOICED + VOICELESS:
             consonant_group += char
         else:
             if len(consonant_group) > 0:
@@ -62,14 +63,16 @@ def GraphemsToPhonems(text):
             consonant_group = ""
             if char != " ":
                 new_text += char
-    return(new_text)
+    return new_text
 
-def PhonemsToDiphones(text):
+
+def phonemstodiphones(text):
     text = "_" + text + "_"
     diphones = []
-    for idx in range(len(text)-1):
-        diphones.append(text[idx:idx+2])
-    return(diphones)
+    for idx in range(len(text) - 1):
+        diphones.append(text[idx:idx + 2])
+    return diphones
 
-def ConvertToDiphones(text):
-    return(PhonemsToDiphones(GraphemsToPhonems(ToSupported(text))))
+
+def converttodiphones(text):
+    return phonemstodiphones(graphemstophonems(tosupported(text)))

@@ -1,3 +1,3 @@
-from diphone_converter import ConvertToDiphones
+from diphone_converter import converttodiphones
 
-print(ConvertToDiphones("chvíli"))
+print(converttodiphones("chvíli"))

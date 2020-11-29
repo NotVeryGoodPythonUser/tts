@@ -1,13 +1,13 @@
 from collections import Counter
 import json
-from diphone_converter import ConvertToDiphones
+from diphone_converter import converttodiphones
 
 counter = Counter()
 with open("cs.txt", "r", encoding="utf8") as wikipedia_file:
 	for idx, line in enumerate(wikipedia_file.readlines()):
 		if idx%100 == 0:
 			print(idx, "                ", end = "\r")
-		for diphone in ConvertToDiphones(line):
+		for diphone in converttodiphones(line):
 			counter[diphone] += 1
 with open("diphone_analysis.json", "w", encoding="utf8") as analysis:
 	analysis.write(json.dumps(dict(counter)))

@@ -1,5 +1,5 @@
 import json
-from diphone_converter import ConvertToDiphones
+from diphone_converter import converttodiphones
 
 with open("syn2015_word_utf8.tsv", "r", encoding="utf8") as words_file:
     result_list = []
@@ -21,7 +21,7 @@ final_word_results = {}
 for diphone in unused:
     print(f"{len(unused)} diphones out of 500 remaining", end="\r")
     for word in result_list:
-        word_diphones = ConvertToDiphones(word)
+        word_diphones = converttodiphones(word)
         if diphone in word_diphones:
             for added in word_diphones:
                 if added in unused:
