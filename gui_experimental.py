@@ -1,11 +1,12 @@
 import tkinter as tk
-from tkinter import scrolledtext as scrt
 
+import special_scrollbar as ss
 from soundmaker import playdiphones
 from diphone_converter import converttodiphones
 
 DARK_GRAY = "#2e2c33"
 GRAY = "#4c4854"
+
 
 class Interface:
     def __init__(self):
@@ -18,7 +19,6 @@ class Interface:
         self.window.wm_attributes("-topmost", 1)
         self.window.geometry("400x300+50+50")
         self.window.bind("<Button-1>", self.get_mouse_pos)
-
 
         self.top_panel = tk.Frame(self.window, bg=DARK_GRAY)
         self.top_panel.bind("<B1-Motion>", self.move_window)
@@ -62,40 +62,51 @@ class Interface:
         self.bottom_border.pack(side=tk.BOTTOM, fill="x")
         self.right_border.pack(side=tk.RIGHT, fill="y")
 
-        title = tk.Label(self.top_panel, text="Software text reader", bg=DARK_GRAY, fg="orange")
+        icon = tk.Label(self.top_panel, text="🗨👄", font="courier 15", bg=DARK_GRAY, fg="orange")
+        icon.pack(side="left")
+        icon.bind("<B1-Motion>", self.move_window)
+        title = tk.Label(self.top_panel, text="Text reader", font="arial 10", bg=DARK_GRAY, fg="orange")
         title.pack(side="left")
         title.bind("<B1-Motion>", self.move_window)
 
         tk.Frame(self.window, height=3, bg=DARK_GRAY).pack(fill="x")
 
-        content_frame = tk.Frame(self.window, bg=GRAY, bd=0)
+        content_frame = tk.Frame(self.window, bg=DARK_GRAY, bd=0)
         content_frame.pack(fill="both", expand=True)
-        self.text = scrt.ScrolledText(
-            content_frame,
-            width=170,
+
+        textframe = tk.Frame(content_frame)
+        self.text = tk.Text(
+            textframe,
+            width=200,
             height=150,
             wrap=tk.WORD,
             fg="white",
             bg=GRAY,
             relief="flat"
         )
-        self.text.vbar.config(
+        self.text_scrollbar = ss.Scrollbar(
+            textframe,
+            command=self.text.yview,
             bg=GRAY,
-            troughcolor="darkgray",
-            relief="flat"
+            fg=DARK_GRAY
+
         )
-        self.text.grid(columnspan=3)
+        self.text["yscrollcommand"] = self.text_scrollbar.set
+        self.text_scrollbar.pack(side=tk.RIGHT, fill="y")
+        self.text.pack(side=tk.LEFT, expand=1, fill="both")
+        textframe.grid(columnspan=3)
+
+        tk.Frame(content_frame, height=3, bd=0, bg=DARK_GRAY).grid(columnspan=3, sticky="we")
+
         insertbutton = tk.Button(
             content_frame,
             text="Ctrl+V",
             command=self.insertclipboard,
             bg=GRAY,
             bd=2,
+            relief="flat",
             overrelief="sunken",
-            relief="ridge",
         )
-        tk.Frame(content_frame, height=2, bd=0, bg=DARK_GRAY).grid(columnspan=3, sticky="we")
-        tk.Frame(content_frame, height=3, bd=0, bg=GRAY).grid()
 
         insertbutton.grid(column=0, sticky="wesn")
         playbutton = tk.Button(
@@ -104,17 +115,17 @@ class Interface:
             command=self.playtext,
             bg=GRAY,
             bd=2,
+            relief="flat",
             overrelief="sunken",
-            relief="ridge",
         )
-        playbutton.grid(column=2, row=3, sticky="wesn")
+        playbutton.grid(column=2, row=2, sticky="wesn")
         content_frame.grid_rowconfigure(0, weight=1)
         content_frame.grid_columnconfigure(0, weight=1)
         content_frame.grid_columnconfigure(2, weight=1)
         content_frame.grid_columnconfigure(1, minsize=3)
 
     def sidepanel(self):
-        if self.sidepanel_mode == True:
+        if self.sidepanel_mode:
             self.sidepanel_mode = False
             self.side_button.config(text="▯")
             self.window.geometry(self.last_geometry)
