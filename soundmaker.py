@@ -3,6 +3,10 @@ import os
 import simpleaudio as sa
 from threading import Thread
 
+def playdiphones(diphones):
+    wav_names = choosewavs(diphones)
+    result_wav = concatenatewavs(wav_names)
+    return playwav(result_wav)
 
 def concatenatewavs(file_name_list, result_path="sound_output.wav"):
     if len(file_name_list) == 0:
@@ -48,10 +52,6 @@ def playwav(sound_wav):
         return
     if os.path.exists(sound_wav):
         wave_obj = sa.WaveObject.from_wave_file(sound_wav)
-        wave_obj.play().wait_done()
+        return(wave_obj.play())
 
 
-def playdiphones(diphones):
-    wav_names = choosewavs(diphones)
-    result_wav = concatenatewavs(wav_names)
-    return Thread(target=lambda: playwav(result_wav), daemon=True).start()

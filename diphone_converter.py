@@ -63,6 +63,7 @@ def graphemstophonems(text):
             consonant_group = ""
             if char != " ":
                 new_text += char
+    print(new_text)
     return new_text
 
 
