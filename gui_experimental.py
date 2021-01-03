@@ -29,7 +29,6 @@ class Interface:
             command=self.text.yview,
             bg=GRAY,
             fg=DARK_GRAY
-
         )
         self.text["yscrollcommand"] = self.text_scrollbar.set
         self.text_scrollbar.pack(side=tk.RIGHT, fill="y")
