@@ -17,6 +17,7 @@ class custom_Tk(tk.Tk):
         del(title)
         self.sidepanel_mode = False
         self.last_geometry = None
+        self.small_mode = False
         self.last_mouse_pos = {}
 
         super().__init__()
@@ -39,7 +40,6 @@ class custom_Tk(tk.Tk):
             relief="flat",
             overrelief="sunken"
         )
-        self.quit_button.pack(side=tk.RIGHT)
         self.side_button = tk.Button(
             self.top_panel,
             text="▯",
@@ -51,8 +51,17 @@ class custom_Tk(tk.Tk):
             relief="flat",
             overrelief="sunken",
         )
-        self.side_button.pack(side=tk.RIGHT)
-        self.top_panel.pack(fill=tk.X)
+        self.small_button = tk.Button(
+            self.top_panel,
+            text="_",
+            command=self.make_small,
+            font=("verdena", "10"),
+            width=3,
+            fg="orange",
+            bg=DARK_GRAY,
+            relief="flat",
+            overrelief="sunken",
+        )
 
         self.top_border = tk.Frame(self.top_panel, cursor="sb_v_double_arrow", bg=DARK_GRAY, height=3)
         self.bottom_border = tk.Frame(self, cursor="sb_v_double_arrow", bg=DARK_GRAY, height=3)
@@ -69,20 +78,51 @@ class custom_Tk(tk.Tk):
         self.right_border.pack(side=tk.RIGHT, fill="y")
 
         if icon_image:
-            #TODO
-            pass
+            self.icon_image = tk.PhotoImage(file=icon_image)
+            if self.icon_image.height()>30:
+                self.icon_image.subsample(self.icon_image.height()//30)
+            self.icon = tk.Label(self.top_panel, image=self.icon_image, font="courier 15", bg=DARK_GRAY, fg="orange")
         else:
-            icon = tk.Label(self.top_panel, text=icon_text, font="courier 15", bg=DARK_GRAY, fg="orange")
-        icon.pack(side="left")
-        icon.bind("<B1-Motion>", self.move_window)
-        title = tk.Label(self.top_panel, text=title_text, font="arial 10", bg=DARK_GRAY, fg="orange")
-        title.pack(side="left")
-        title.bind("<B1-Motion>", self.move_window)
+            self.icon = tk.Label(self.top_panel, text=icon_text, font="courier 15", bg=DARK_GRAY, fg="orange")
+        self.icon.bind("<B1-Motion>", self.move_window)
+        self.title = tk.Label(self.top_panel, text=title_text, font="arial 10", bg=DARK_GRAY, fg="orange")
+        self.title.bind("<B1-Motion>", self.move_window)
 
         tk.Frame(self, height=3, bg=DARK_GRAY).pack(fill="x")
 
         self.content_frame = tk.Frame(self, bg=DARK_GRAY, bd=0)
+        self.pack_all()
+
+    def pack_all(self):
+        self.quit_button.pack(side=tk.RIGHT)
+        self.side_button.pack(side=tk.RIGHT)
+        self.small_button.pack(side=tk.RIGHT)
+        self.icon.pack(side="left")
+        self.title.pack(side="left")
+        self.top_panel.pack(fill=tk.X)
+
+        self.left_border.pack(side=tk.LEFT, fill="y")
+        self.top_border.pack(fill="x")
+        self.bottom_border.pack(side=tk.BOTTOM, fill="x")
+        self.right_border.pack(side=tk.RIGHT, fill="y")
+
         self.content_frame.pack(fill="both", expand=True)
+
+    def unpack_all(self):
+        self.quit_button.pack_forget()
+        self.side_button.pack_forget()
+        self.small_button.pack_forget()
+        self.icon.pack_forget()
+        self.title.pack_forget()
+        self.top_panel.pack_forget()
+
+        self.left_border.pack_forget()
+        self.top_border.pack_forget()
+        self.bottom_border.pack_forget()
+        self.right_border.pack_forget()
+
+        self.content_frame.pack_forget()
+        print("all packs forgotten")
 
     def sidepanel(self):
         if self.sidepanel_mode:
@@ -96,6 +136,32 @@ class custom_Tk(tk.Tk):
             screen_height = self.winfo_screenheight()
             screen_width = self.winfo_screenwidth()
             self.geometry(f"200x{screen_height}+{screen_width-200}+0")
+
+    def make_small(self):
+        if self.small_mode:
+            self.quit_button.pack_forget()
+            self.small_button.pack_forget()
+            self.icon.pack_forget()
+            self.top_panel.pack_forget()
+            last_size = self.last_geometry[:self.last_geometry.index("+")]
+            self.geometry(last_size)
+            self.pack_all()
+            self.small_button.config(text="_")
+            self.small_mode=False
+        else:
+            self.unpack_all()
+            self.quit_button.pack(side=tk.RIGHT)
+            self.small_button.pack(side=tk.RIGHT)
+            self.icon.pack(side="left")
+            self.top_panel.pack(fill=tk.X)
+            self.last_geometry = self.geometry()
+            width = 10
+            width += self.icon.winfo_width()
+            width += self.small_button.winfo_width()
+            width += self.quit_button.winfo_width()
+            self.geometry(f"{width}x30")
+            self.small_button.config(text="◻")
+            self.small_mode = True
 
     def get_mouse_pos(self, event):
         self.last_mouse_pos["x"] = event.x

@@ -13,7 +13,7 @@ class Interface:
     def __init__(self):
         self.play_object = None
 
-        content_frame = custom_Tk(title="Text reader" ,icon="🗨👄").content_frame
+        content_frame = custom_Tk(title="Text reader" ,icon="icon.png").content_frame
         textframe = tk.Frame(content_frame)
         self.text = tk.Text(
             textframe,

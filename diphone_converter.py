@@ -43,13 +43,13 @@ def graphemstophonems(text):
     new_text = ""
     consonant_group = ""
     for char in text:
-        if char == "X":
+        if char in ("X","ř"):
             for consonant in consonant_group:
                 if consonant in VOICED_TO_VOICELESS:
                     new_text += VOICED_TO_VOICELESS[consonant]
                 else:
                     new_text += consonant
-            new_text += "X"
+            new_text += char
             consonant_group = ""
         elif char in CONSONANTS:
             consonant_group += char
