@@ -1,5 +1,10 @@
+"""word searcher
+this script finds set of words from syn2015_word_utf8.tsv that includes
+500 most common diphones. The words are saved to words_to_read.txt.
+"""
+
 import json
-from diphone_converter import converttodiphones
+from diphone_converter import convert_to_diphones
 
 with open("syn2015_word_utf8.tsv", "r", encoding="utf8") as words_file:
     result_list = []
@@ -21,7 +26,7 @@ final_word_results = {}
 for diphone in unused:
     print(f"{len(unused)} diphones out of 500 remaining", end="\r")
     for word in result_list:
-        word_diphones = converttodiphones(word)
+        word_diphones = convert_to_diphones(word)
         if diphone in word_diphones:
             for added in word_diphones:
                 if added in unused:
