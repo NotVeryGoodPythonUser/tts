@@ -1,4 +1,6 @@
-"""diphone_converter tester
+"""
+diphone_converter tester
+========================
 this script enables user to test module diphone_converter.py
 """
 from diphone_converter import convert_to_diphones

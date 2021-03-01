@@ -1,4 +1,6 @@
-"""word searcher
+"""
+word searcher
+=============
 this script finds set of words from syn2015_word_utf8.tsv that includes
 500 most common diphones. The words are saved to words_to_read.txt.
 """

@@ -1,3 +1,17 @@
+"""
+Diphone converter
+=================
+Module allows user to convert text in czech to set of diphones.
+Uses information stored in file convert_data.json.
+
+functions
+_________
+* to_supported - Changes text to contain only supported characters.
+* graphems_to_phonems - Creates phonetic transcription of text.
+* phonems_to_diphones - Creates sequence of diphones from phonetic
+  transcription.
+* convert_to_diphones - Makes sequence of diphones from text.
+"""
 import json
 
 with open("preparation/convert_data.json", "r", encoding="utf8") as json_data_file:
@@ -11,7 +25,14 @@ with open("preparation/convert_data.json", "r", encoding="utf8") as json_data_fi
     NUM_CONVERT_DICT = data["number dict"]
 
 
-def tosupported(text):
+def to_supported(text):
+    """
+    changes text to contain only supported characters
+
+    :param str text: Text to be changed to supported characters
+    :return: text containing only supported characters
+    :rtype: str
+    """
     text = text.lower()
     new_text = ""
     for char in text:
@@ -24,7 +45,16 @@ def tosupported(text):
     return new_text
 
 
-def graphemstophonems(text):
+def graphems_to_phonems(text):
+    """
+    creates phonetic transcription of text
+
+    :param str text: text to be phonetically transcribed
+    :return: phonetic transcription of text
+    :rtype: str
+    """
+    text = to_supported(text)
+
     # special rules
     idx = 0
     new_text = ""
@@ -43,7 +73,7 @@ def graphemstophonems(text):
     new_text = ""
     consonant_group = ""
     for char in text:
-        if char in ("X","ř"):
+        if char in ("X", "ř"):
             for consonant in consonant_group:
                 if consonant in VOICED_TO_VOICELESS:
                     new_text += VOICED_TO_VOICELESS[consonant]
@@ -74,7 +104,14 @@ def graphemstophonems(text):
     return new_text
 
 
-def phonemstodiphones(text):
+def phonems_to_diphones(text):
+    """
+    creates sequence of diphones from phonetic transcription
+
+    :param str text: phonetical transcription of text
+    :return: sequence of diphones, list of 2 characters long strings
+    :rtype: list[str]
+    """
     text = "_" + text + "_"
     diphones = []
     for idx in range(len(text) - 1):
@@ -82,5 +119,12 @@ def phonemstodiphones(text):
     return diphones
 
 
-def converttodiphones(text):
-    return phonemstodiphones(graphemstophonems(tosupported(text)))
+def convert_to_diphones(text):
+    """
+    makes sequence of diphones from text
+
+    :param str text: text to be converted to diphones
+    :return: sequence of diphones, list of 2 characters long strings
+    :rtype: list[str]
+    """
+    return phonems_to_diphones(graphems_to_phonems(text))

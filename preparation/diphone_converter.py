@@ -1,5 +1,6 @@
-"""diphone converter
-
+"""
+diphone converter
+=================
 Module allows user to convert text in czech to set of diphones.
 Uses information stored in file convert_data.json.
 
