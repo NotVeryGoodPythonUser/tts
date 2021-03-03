@@ -101,6 +101,7 @@ class Scrollbar(tk.Frame):
     def correct_slider_width(self):
         """
         corrects width of the slider
+
         :return: None
         """
         self.update()
@@ -114,6 +115,7 @@ class Scrollbar(tk.Frame):
 
         to connect another widget to the scrollbar use the set method
         as yscrollcommand of that widget
+
         :param float top: position of the top of the slider, float
             between 0 and 1 (0 is top, 1 is bottom)
         :param float bottom: position of the bottom of the slider, float
@@ -131,6 +133,7 @@ class Scrollbar(tk.Frame):
     def up_button_handler(self):
         """
         moves connected widget up
+
         :return: None
         """
         top, bottom = self.last_set
@@ -143,6 +146,7 @@ class Scrollbar(tk.Frame):
     def down_button_handler(self):
         """
         moves connected widget down
+
         :return: None
         """
         top, bottom = self.last_set
@@ -156,6 +160,7 @@ class Scrollbar(tk.Frame):
     def drag_slider(self, event):
         """
         handles dragging of slider using mouse
+
         :return: None
         """
         in_trough = (self.trough.winfo_pointery() - self.trough.winfo_rooty())
