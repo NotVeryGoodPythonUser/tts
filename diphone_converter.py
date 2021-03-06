@@ -69,39 +69,71 @@ def graphems_to_phonems(text):
             new_text += text[idx]
             idx += 1
     text = new_text
+
     # spodoba znělosti
     new_text = ""
     consonant_group = ""
     for char in text:
-        if char in ("X", "ř"):
-            for consonant in consonant_group:
-                if consonant in VOICED_TO_VOICELESS:
-                    new_text += VOICED_TO_VOICELESS[consonant]
-                else:
-                    new_text += consonant
+        if char in ("X", "ř") and len(consonant_group) > 0:
+            new_text += to_voiceless(consonant_group)
             new_text += char
             consonant_group = ""
         elif char in CONSONANTS:
             consonant_group += char
-        else:
-            if len(consonant_group) > 0:
-                if consonant_group[-1] in VOICED_TO_VOICELESS:
-                    for consonant in consonant_group:
-                        if consonant in VOICELESS_TO_VOICED:
-                            new_text += VOICELESS_TO_VOICED[consonant]
-                        else:
-                            new_text += consonant
-                elif consonant_group[-1] in VOICELESS_TO_VOICED:
-                    for consonant in consonant_group:
-                        if consonant in VOICED_TO_VOICELESS:
-                            new_text += VOICED_TO_VOICELESS[consonant]
-                        else:
-                            new_text += consonant
+        elif char in ("_", " ") and len(consonant_group) > 0:
+            new_text += to_voiceless(consonant_group)
             consonant_group = ""
-            if char != " ":
-                new_text += char
+        elif len(consonant_group) > 0:
+            if consonant_group[-1] in VOICED_TO_VOICELESS:
+                new_text += to_voiced(consonant_group)
+            elif consonant_group[-1] in VOICELESS_TO_VOICED:
+                new_text += to_voiceless(consonant_group)
+            consonant_group = ""
+        if char not in CONSONANTS+[" "]:
+            new_text += char
+
+    if len(consonant_group) > 0:
+        if consonant_group[-1] in VOICED_TO_VOICELESS:
+            new_text += to_voiced(consonant_group)
+        elif consonant_group[-1] in VOICELESS_TO_VOICED:
+            new_text += to_voiceless(consonant_group)
+        consonant_group = ""
     print(new_text)
     return new_text
+
+
+def to_voiced(consonant_group):
+    """
+    changes all voiceless consonants with voiced pair to voiced
+
+    :param str consonant_group: group of consonants
+    :return: group of voiced consonants
+    :rtype: str
+    """
+    new_group = ""
+    for consonant in consonant_group:
+        if consonant in VOICELESS_TO_VOICED:
+            new_group += VOICELESS_TO_VOICED[consonant]
+        else:
+            new_group += consonant
+    return new_group
+
+
+def to_voiceless(consonant_group):
+    """
+    changes all voiced consonants with voiceless pair to voiceless
+
+    :param str consonant_group: group of consonants
+    :return: group of voiceless consonants
+    :rtype: str
+    """
+    new_group = ""
+    for consonant in consonant_group:
+        if consonant in VOICED_TO_VOICELESS:
+            new_group += VOICED_TO_VOICELESS[consonant]
+        else:
+            new_group += consonant
+    return new_group
 
 
 def phonems_to_diphones(text):
