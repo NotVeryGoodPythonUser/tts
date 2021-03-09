@@ -81,6 +81,7 @@ def choose_wavs(diphones):
         :return: list of two substitute diphones
         :rtype: list[str]
         """
+        print("escaping ", unknown_diphone)
         return [unknown_diphone[0]+"-", "-"+unknown_diphone[1]]
 
     wav_names = []

@@ -93,10 +93,7 @@ def graphems_to_phonems(text):
             new_text += char
 
     if len(consonant_group) > 0:
-        if consonant_group[-1] in VOICED_TO_VOICELESS:
-            new_text += to_voiced(consonant_group)
-        elif consonant_group[-1] in VOICELESS_TO_VOICED:
-            new_text += to_voiceless(consonant_group)
+        new_text += to_voiceless(consonant_group)
         consonant_group = ""
     print(new_text)
     return new_text
