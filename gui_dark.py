@@ -46,7 +46,7 @@ class Interface:
         self.play_object = None
 
         self.window = CustomTk(
-            title="Text reader",
+            title="Syntéza řeči",
             icon="icon_orange.png",
             bg=win_bg,
             fg=widg_fg
@@ -80,7 +80,7 @@ class Interface:
 
         insertbutton = tk.Button(
             content_frame,
-            text="Ctrl+V",
+            text="Vložit",
             command=self.insert_clipboard,
             bg=widg_bg,
             fg=widg_fg,
@@ -92,7 +92,7 @@ class Interface:
 
         playbutton = tk.Button(
             content_frame,
-            text="Read!",
+            text="Čti!",
             command=self.play_text,
             bg=widg_bg,
             fg=widg_fg,
