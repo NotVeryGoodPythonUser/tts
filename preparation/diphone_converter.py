@@ -97,7 +97,6 @@ def graphems_to_phonems(text):
             consonant_group = ""
             if char != " ":
                 new_text += char
-    print(new_text)
     return new_text
 
 
