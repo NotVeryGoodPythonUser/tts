@@ -12,8 +12,11 @@ functions:
     * convert_to_diphones - Makes sequence of diphones from text.
 """
 import json
+import os
 
-with open("convert_data.json", "r", encoding="utf8") as json_data_file:
+package_directory = os.path.dirname(os.path.abspath(__file__))
+convert_data_path = os.path.join(package_directory, "convert_data.json")
+with open(convert_data_path, "r", encoding="utf8") as json_data_file:
     data = json.loads(json_data_file.read())
     ALL_SUPPORTED = data["all_supported"]
     CONSONANTS = data["consonants"]

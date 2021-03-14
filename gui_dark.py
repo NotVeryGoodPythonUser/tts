@@ -15,7 +15,7 @@ import tkinter as tk
 from custom_window import CustomTk
 import custom_scrollbar as cs
 from soundmaker import play_diphones
-from diphone_converter import convert_to_diphones
+from preparation.diphone_converter import convert_to_diphones
 
 
 class Interface:
