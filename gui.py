@@ -35,7 +35,7 @@ class Interface:
         self.window = tk.Tk()
         self.window.minsize(200, 100)
         self.window.title("Text to speech")
-        self.window.iconbitmap("icon.ico")
+        #self.window.iconbitmap("icon.ico")
         self.text = scrt.ScrolledText(self.window, width=50, height=15)
         self.text.grid(pady=3, padx=2, sticky="wesn", columnspan=2)
         insertbutton = tk.Button(text="insert from clipboard", command=self.insert_from_clipboard)
