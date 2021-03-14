@@ -13,7 +13,7 @@ import tkinter as tk
 from tkinter import scrolledtext as scrt
 
 from soundmaker import play_diphones
-from diphone_converter import convert_to_diphones
+from preparation.diphone_converter import convert_to_diphones
 
 
 class Interface:
