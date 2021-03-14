@@ -1,5 +1,5 @@
 {
-  "all supported": [
+  "all_supported": [
     " ",
     "a",
     "á",
@@ -67,7 +67,7 @@
     "h",
     "X"
   ],
-  "voiced to voiceless": {
+  "voiced_to_voiceless": {
     "b": "p",
     "d": "t",
     "C": "c",
@@ -80,7 +80,7 @@
     "ž": "š",
     "h": "X"
   },
-  "voiceless to voiced": {
+  "voiceless_to_voiced": {
     "p": "b",
     "t": "d",
     "c": "C",
@@ -92,7 +92,7 @@
     "Ř": "ř",
     "š": "ž"
   },
-  "single char replacing": {
+  "single_char_replacing": {
     "y": "i",
     "ý": "í",
     "ě": "je",
@@ -102,7 +102,7 @@
     "w": "v",
     " ": "_"
   },
-  "two chars replacing": {
+  "two_chars_replacing": {
     "ti": "ťi",
     "di": "ďi",
     "ni": "ňi",
@@ -118,7 +118,7 @@
     "ii": "iji",
     "ií": "ijí"
   },
-  "number dict": {
+  "number_dict": {
     "0": "nula_",
     "1": "jedna_",
     "2": "dva_",

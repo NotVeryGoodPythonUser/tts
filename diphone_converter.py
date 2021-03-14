@@ -16,13 +16,13 @@ import json
 
 with open("preparation/convert_data.json", "r", encoding="utf8") as json_data_file:
     data = json.loads(json_data_file.read())
-    ALL_SUPPORTED = data["all supported"]
+    ALL_SUPPORTED = data["all_supported"]
     CONSONANTS = data["consonants"]
-    VOICED_TO_VOICELESS = data["voiced to voiceless"]
-    VOICELESS_TO_VOICED = data["voiceless to voiced"]
-    REPLACING_SINGLE_CHAR = data["single char replacing"]
-    REPLACING_TWO_CHAR = data["two chars replacing"]
-    NUM_CONVERT_DICT = data["number dict"]
+    VOICED_TO_VOICELESS = data["voiced_to_voiceless"]
+    VOICELESS_TO_VOICED = data["voiceless_to_voiced"]
+    REPLACING_SINGLE_CHAR = data["single_char_replacing"]
+    REPLACING_TWO_CHAR = data["two_chars_replacing"]
+    NUM_CONVERT_DICT = data["number_dict"]
 
 
 def to_supported(text):
@@ -94,8 +94,6 @@ def graphems_to_phonems(text):
 
     if len(consonant_group) > 0:
         new_text += to_voiceless(consonant_group)
-        consonant_group = ""
-    print(new_text)
     return new_text
 
 

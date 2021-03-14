@@ -16,12 +16,13 @@ from diphone_converter import convert_to_diphones
 
 counter = Counter()
 with open("cs.txt", "r", encoding="utf8") as text_file:
-	idx=0
-	for line in text_file.readlines():
-		if idx % 5000 == 0:
-			print(f"přečteno {idx} řádků")
-		for diphone in convert_to_diphones(line):
-			counter[diphone] += 1
-		idx += 1
+    idx=0
+    for line in text_file.readlines():
+        if idx % 5000 == 0:
+            print(f"přečteno {idx} řádků")
+        for diphone in convert_to_diphones(line):
+            counter[diphone] += 1
+        idx += 1
+    counter = counter.most_common()
 with open("diphone_analysis.json", "w", encoding="utf8") as analysis:
-	analysis.write(json.dumps(dict(counter)))
+    analysis.write(json.dumps(dict(counter)))

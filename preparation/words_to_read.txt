@@ -1,144 +1,308 @@
-ho
-byla
-první
-jste
-opravdu
-v
-asi
-všechno
-mi
-řekl
-vždycky
-za
-hvězdy
-dvaadvacet
-poslední
-zároveň
-jen
-večer
-skoro
-téže
-září
-více
-které
-části
-být
-vám
-vidět
-zhruba
-ani
-jakýmsi
-ostatní
-atmosféru
-celá
-ještě
-život
-umění
-firmware
-mít
-pozornost
-východní
-jejich
-jakýchsi
-jsou
-roce
-různých
-intuitivní
-velké
-do
-podobně
-další
-na
-bylo
-především
-okna
-nebo
-tisíc
-skupiny
-stojí
-švédské
-ségra
-teorie
-pomocí
-kolem
-naprosto
-nutné
-doopravdy
-tam
-organizace
-součástí
-říká
-době
-února
-jakési
-rádi
-řadu
-představuje
-při
-prvky
-zejména
-týče
-ulici
-každý
-kdyby
-afghánské
-spolu
-téměř
-práce
-celé
-chvíli
-bude
-rodiče
-ty
-let
-brzy
-musíte
-začíná
-služby
-jednoduché
-pouze
-posléze
-krku
-vnější
-výrazně
-důležité
-mnoha
-neustále
-či
-který
-podle
-stejné
-společnosti
-ovšem
-dokonce
-druhé
-přišel
-venku
-děti
-jeho
-ruku
-udělat
-zeptal
-lidé
-opět
-vrátil
-velmi
-peníze
-nejprve
-jednání
-dochází
-vulgární
-sjezdu
-spojuje
-historii
-činnosti
-náhle
-obtížné
-budoucnosti
-knihy
-stébla
-takže
-vzduchu
-oddanost
-půlroční
-haldy
+je: ['_j', 'je', 'e_']
+na: ['_n', 'na', 'a_']
+tedy: ['_t', 'te', 'ed', 'di', 'i_']
+jste: ['js', 'st']
+byla: ['_b', 'bi', 'il', 'la']
+člověk: ['_č', 'čl', 'lo', 'ov', 'vj', 'ek', 'k_']
+pro: ['_p', 'pr', 'ro', 'o_']
+není: ['ne', 'eň', 'ňí', 'í_']
+jen: ['en', 'n_']
+φφ: ['__']
+po: ['po']
+strany: ['_s', 'tr', 'ra', 'an', 'ni']
+dva: ['_d', 'dv', 'va']
+před: ['př', 'ře', 'et', 't_']
+poslední: ['os', 'sl', 'le', 'dň']
+bez: ['be', 'es', 's_']
+dnes: ['dn']
+tady: ['ta', 'ad']
+se: ['se']
+ale: ['_a', 'al']
+nevím: ['ev', 'ví', 'ím', 'm_']
+jako: ['ja', 'ak', 'ko']
+které: ['_k', 'kt', 'er', 'ré', 'é_']
+byly: ['li']
+bude: ['bu', 'ud', 'de']
+skoro: ['sk', 'or']
+jsou: ['so', 'ou', 'u_']
+to: ['to']
+mě: ['_m', 'mň', 'ňe']
+jsem: ['em']
+měl: ['el', 'l_']
+jiné: ['ji', 'in', 'né']
+podle: ['od', 'dl']
+jeho: ['eh', 'ho']
+jednu: ['nu']
+roce: ['_r', 'oc', 'ce']
+tisíc: ['_ť', 'ťi', 'is', 'sí', 'íc', 'c_']
+ulici: ['_u', 'ul', 'ic', 'ci']
+do: ['do']
+všechno: ['_f', 'fš', 'še', 'no']
+vidět: ['_v', 'vi', 'iď', 'ďe']
+jejich: ['ej', 'iX', 'X_']
+při: ['ři']
+opravdu: ['_o', 'op', 'av', 'vd', 'du']
+asi: ['as', 'si']
+ve: ['ve']
+kolem: ['ol']
+době: ['ob', 'bj']
+starší: ['ar', 'rš', 'ší']
+nad: ['at']
+mají: ['ma', 'aj', 'jí']
+ani: ['aň', 'ňi']
+svou: ['_z', 'zv', 'vo']
+každý: ['ka', 'až', 'žd', 'dí']
+dokonce: ['ok', 'on', 'nc']
+svých: ['íX']
+mezi: ['me', 'ez', 'zi']
+rychle: ['ri']
+přitom: ['it', 'om']
+také: ['ké']
+mi: ['mi']
+roku: ['ku']
+život: ['_ž', 'ži', 'iv', 'ot']
+například: ['ap', 'ří', 'ík', 'kl']
+tam: ['am']
+za: ['za']
+nás: ['ná', 'ás']
+místo: ['mí', 'ís']
+směrem: ['sm', 're']
+moc: ['mo']
+ze: ['ze']
+později: ['oz', 'zď']
+ty: ['ti']
+která: ['rá', 'á_']
+lidé: ['_l', 'id', 'dé']
+vám: ['vá', 'ám']
+společnosti: ['sp', 'eč', 'čn', 'sť']
+pak: ['pa']
+několik: ['_ň', 'ik']
+představuje: ['ts', 'vu', 'uj']
+tu: ['tu']
+musí: ['mu', 'us']
+lepší: ['ep', 'pš']
+výrazně: ['ír', 'az', 'zň']
+vždycky: ['vž', 'ck', 'ki']
+nebo: ['eb', 'bo']
+zde: ['zd']
+stále: ['tá', 'ál']
+další: ['da', 'lš']
+korun: ['ru', 'un']
+vypadá: ['ip', 'dá']
+aby: ['ab']
+hodin: ['_h', 'oď', 'ďi']
+stojí: ['oj']
+skupiny: ['up', 'pi']
+opět: ['pj']
+večer: ['če', 'r_']
+nějaký: ['kí']
+že: ['že']
+vrátil: ['vr', 'áť']
+organizace: ['rg', 'ga', 'iz', 'ac']
+dříve: ['tř', 'ív']
+svého: ['vé', 'éh']
+miliardy: ['ia', 'rd']
+různých: ['rú', 'úz', 'zn', 'ní']
+tento: ['nt']
+jim: ['im']
+kromě: ['kr']
+pomocí: ['cí']
+čtyři: ['čt', 'iř']
+podmínky: ['dm', 'ín', 'nk']
+konstrukce: ['ns', 'uk', 'kc']
+samozřejmě: ['sa', 'sř', 'jm']
+první: ['rv', 'vň']
+začal: ['ač', 'ča']
+naopak: ['ao']
+kdyby: ['_g', 'gd', 'ib']
+přijde: ['ij', 'jd']
+bychom: ['io']
+toho: ['oh']
+spolu: ['lu']
+případě: ['íp', 'aď']
+ještě: ['eš', 'šť', 'ťe']
+téměř: ['té', 'ém', 'eŘ', 'Ř_']
+druhé: ['dr', 'uh', 'hé']
+tím: ['ťí']
+všech: ['eX']
+něco: ['ec', 'co']
+ráno: ['án']
+nutné: ['ut', 'tn']
+určitě: ['ur', 'rč', 'či', 'iť']
+právě: ['áv']
+zároveň: ['zá', 'ár', 'ň_']
+energie: ['_e', 'gi', 'ie']
+oddanost: ['dd']
+teorie: ['eo']
+pořád: ['oř', 'řá', 'át']
+peníze: ['pe', 'íz']
+zhruba: ['zh', 'hr', 'ub', 'ba']
+celá: ['_c', 'lá']
+zpátky: ['pá', 'tk']
+říká: ['_ř', 'ká']
+nechal: ['ea']
+vztahu: ['fs', 'ah', 'hu']
+jejího: ['íh']
+umění: ['um']
+mohl: ['hl']
+schopnost: ['sX', 'Xo', 'pn']
+kompletní: ['mp', 'pl', 'tň']
+protože: ['ož']
+úplně: ['_ú', 'úp', 'lň']
+dobré: ['br']
+uvedl: ['uv']
+týden: ['tí', 'íd']
+jakýmsi: ['ms']
+mnohem: ['mn', 'he']
+dochází: ['oá', 'áz', 'zí']
+vlastní: ['vl']
+firmy: ['fi', 'ir', 'rm']
+jednání: ['áň']
+ovšem: ['of']
+mnoha: ['ha']
+být: ['bí', 'ít']
+celý: ['lí']
+jinde: ['nd']
+důležité: ['dú', 'úl', 'ež']
+pouze: ['uz']
+pachatele: ['aa']
+zemědělské: ['eď', 'ls']
+rodiče: ['ič']
+velké: ['lk']
+odpověděl: ['tp']
+někdo: ['eg']
+ke: ['ke']
+když: ['iš', 'š_']
+příběh: ['íb']
+žádné: ['žá', 'ád']
+především: ['ef']
+proč: ['oč', 'č_']
+muže: ['už']
+auta: ['au']
+knihy: ['kň', 'ih', 'hi']
+teď: ['eť', 'ť_']
+pozornost: ['zo', 'rn']
+osmdesátých: ['md', 'sá']
+chvíli: ['_X', 'Xv', 'íl']
+října: ['íj', 'jn']
+situace: ['ua']
+způsobem: ['pú', 'ús']
+stav: ['af', 'f_']
+oblasti: ['bl']
+dýchat: ['ía']
+plné: ['ln']
+vzduchu: ['vz', 'uu']
+až: ['aš']
+má: ['má']
+skutečně: ['čň']
+domů: ['mú', 'ú_']
+linii: ['iň', 'ii']
+takže: ['ag', 'gž']
+zatím: ['ať']
+prsty: ['rs']
+absolvoval: ['ps', 'lv']
+srdce: ['sr', 'rt', 'tc']
+kombinaci: ['mb']
+pochopitelně: ['oo']
+lidí: ['ďí']
+programu: ['og', 'gr']
+bezcharakterní: ['Xa', 'rň']
+celé: ['lé']
+vést: ['és']
+větší: ['tš']
+detaily: ['ai']
+přibližně: ['iž', 'žň']
+zrovna: ['zr', 'vn']
+nnn: ['nn']
+nikdy: ['ig']
+základní: ['ák']
+který: ['rí']
+tj: ['tj', 'j_']
+lze: ['lz']
+informace: ['_i', 'nf', 'fo']
+součástí: ['uč', 'čá']
+takzvané: ['gz']
+střechy: ['ei']
+neustále: ['eu']
+typu: ['pu']
+snaží: ['sn', 'ží']
+času: ['su']
+rozsahu: ['ss']
+kolemjdoucí: ['mj', 'uc']
+zápas: ['áp']
+vévoda: ['év']
+východní: ['ío']
+tramvaje: ['mv']
+the: ['dh']
+kvůli: ['gv', 'vú']
+kteří: ['eř']
+volby: ['lb']
+trenér: ['ér']
+zejména: ['mé', 'én']
+wellness: ['ll']
+jestli: ['tl']
+lépe: ['ép']
+haldy: ['ld']
+generace: ['ge']
+velmi: ['lm']
+školy: ['_š', 'šk']
+čím: ['čí']
+zboží: ['zb']
+využít: ['iu']
+cca: ['cc', 'ca']
+přesně: ['sň']
+francouzské: ['fr']
+vztah: ['aX']
+vliv: ['if']
+x: ['ks']
+už: ['uš']
+tajemství: ['mz']
+náboženství: ['áb', 'nz']
+alespoň: ['oň']
+přesvědčení: ['tč']
+mm: ['mm']
+důvod: ['úv']
+alb: ['lp', 'p_']
+kHz: ['kX', 'Xs']
+plocha: ['oa']
+odchází: ['tX', 'Xá']
+snímku: ['mk']
+stavby: ['vb']
+krku: ['rk']
+míč: ['íč']
+jo: ['jo']
+ploch: ['oX']
+kultury: ['lt']
+kůže: ['kú', 'úž']
+níž: ['íš']
+všichni: ['ši']
+brzy: ['rz']
+proti: ['oť']
+zařízení: ['ař']
+práce: ['ác']
+mluvit: ['ml']
+hudby: ['db']
+duchovní: ['uo']
+volbách: ['bá', 'áX']
+což: ['oš']
+festivalu: ['fe']
+snížení: ['íž']
+smrti: ['mr', 'rť']
+fakt: ['fa']
+odchylky: ['Xi']
+vnější: ['jš']
+touchpad: ['uX', 'Xp']
+září: ['ář']
+posléze: ['éz']
+však: ['ša']
+vierteljude: ['lj', 'ju']
+dům: ['úm']
+provozu: ['zu']
+této: ['ét']
+komunikace: ['uň']
+kategorie: ['go']
+značky: ['čk']
+pohlédl: ['éd']
+dětmi: ['_ď', 'tm']
+nadchl: ['Xl']
+lékař: ['ék', 'aŘ']

@@ -6,10 +6,12 @@ this script finds set of words from syn2015_word_utf8.tsv that includes
 """
 
 import json
+from collections import Counter
+
 from diphone_converter import convert_to_diphones
 
 with open("syn2015_word_utf8.tsv", "r", encoding="utf8") as words_file:
-    result_list = []
+    possible_words = []
     for line in words_file:
         words = line.split()
         if words[0].isdigit():
@@ -17,41 +19,43 @@ with open("syn2015_word_utf8.tsv", "r", encoding="utf8") as words_file:
         else:
             word = words[0]
         if word[-1] != "." and word[0].islower():
-            result_list.append(word)
+            possible_words.append(word)
+
 
 with open("diphone_analysis.json", "r", encoding="utf8") as json_file:
     diphones = json.loads(json_file.read())
-    diphones = list(diphones)
 
-unused = diphones[:500]
+diphones = Counter(diphones)
+print(diphones)
+diphones = diphones.most_common(500)
+diphones = [diphone[0] for diphone in diphones]
+
+unused = diphones
+used = []
 final_word_results = {}
-for diphone in unused:
-    print(f"{len(unused)} diphones out of 500 remaining", end="\r")
-    for word in result_list:
+while len(unused) > 0:
+    diphone = unused[0]
+    print(f"{len(unused)} diphones remaining")
+    for word in possible_words:
         word_diphones = convert_to_diphones(word)
         if diphone in word_diphones:
-            for added in word_diphones:
-                if added in unused:
-                    unused.remove(added)
-            final_word_results[word] = word_diphones
+            added_by_word = []
+            for diphone_from_word in word_diphones:
+                if diphone_from_word in unused:
+                    unused.remove(diphone_from_word)
+                if diphone_from_word not in used:
+                    used.append(diphone_from_word)
+                    added_by_word.append(diphone_from_word)
+            final_word_results[word] = added_by_word
             break
+    if len(unused) > 0 and unused[0] == diphone:
+        print(f"didn't find word with diphone {diphone}")
+        unused.pop(0)
+del used, unused
 
+result_string = ""
 for word in final_word_results:
-    redundant = False
-    others = final_word_results.copy()
-    others.pop(word)
-    for diphone in final_word_results[word]:
-        diphone_found = False
-        for other_word in others:
-            if diphone in others[other_word]:
-                diphone_found = True
-                break
-        if not diphone_found:
-            redundant = False
-            break
-    if redundant:
-        print(f"word {word} is redundant.\n")
-        final_word_results.pop(word)
+    result_string += f"{word}: {final_word_results[word]}\n"
 
 with open("words_to_read.txt", "w", encoding="utf8") as result_file:
-    result_file.write("\n".join(final_word_results))
+    result_file.write(result_string)
