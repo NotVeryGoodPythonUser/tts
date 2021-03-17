@@ -13,10 +13,11 @@ from collections import Counter
 import json
 
 from diphone_converter import convert_to_diphones
+file_to_analyse = "cs.txt"      # link to download cs.txt: https://lindat.mff.cuni.cz/repository/xmlui/bitstream/handle/11234/1-2735/cs.txt.gz?sequence=54&isAllowed=y
 
 counter = Counter()
-with open("cs.txt", "r", encoding="utf8") as text_file:
-    idx=0
+with open(file_to_analyse, "r", encoding="utf8") as text_file:
+    idx = 0
     for line in text_file.readlines():
         if idx % 5000 == 0:
             print(f"přečteno {idx} řádků")

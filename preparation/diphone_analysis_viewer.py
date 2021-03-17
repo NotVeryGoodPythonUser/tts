@@ -20,8 +20,8 @@ for diphone in analysis_dict:
         break
     print(diphone, ":", analysis_dict[diphone])
 print()
-print("to get number of occurrences of particular diphone, type it.\n"
-      "if you want to quit, type quit.")
+print("Pokud chceš znát četnost difonu, napiš difon a stiskni enter.\n"
+      "Pokud chceš skript ukončit, napiš 'quit'")
 while True:
     question = input("> ")
     if question == "quit":
@@ -29,4 +29,4 @@ while True:
     if question in analysis_dict:
         print(analysis_dict[question])
     else:
-        print("this diphone was not found")
+        print("difon nenalezen")

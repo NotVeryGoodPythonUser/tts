@@ -47,17 +47,14 @@ def to_supported(text):
     return new_text
 
 
-def graphems_to_phonems(text):
+def apply_special_rules(text):
     """
-    creates phonetic transcription of text
+    applies on text special rules from convert_data.json
 
-    :param str text: text to be phonetically transcribed
-    :return: phonetic transcription of text
+    :param str text: text to apply rules on
+    :return: text with applied rules
     :rtype: str
     """
-    text = to_supported(text)
-
-    # special rules
     idx = 0
     new_text = ""
     while idx < len(text):
@@ -70,19 +67,23 @@ def graphems_to_phonems(text):
         else:
             new_text += text[idx]
             idx += 1
-    text = new_text
+    return new_text
 
-    # spodoba znělosti
+
+def apply_assimilation(text):
+    """
+    applies regressive assimilation on text. (spodoba znělosti)
+
+    :param str text: text to apply assimilation on
+    :return: text with applied assimilation
+    :rtype: str
+    """
     new_text = ""
     consonant_group = ""
     for char in text:
-        if char in ("X", "ř") and len(consonant_group) > 0:
-            new_text += to_voiceless(consonant_group)
-            new_text += char
-            consonant_group = ""
-        elif char in CONSONANTS:
+        if char in CONSONANTS:
             consonant_group += char
-        elif char in ("_", " ") and len(consonant_group) > 0:
+        elif char in ("_", " ", "X") and len(consonant_group) > 0:
             new_text += to_voiceless(consonant_group)
             consonant_group = ""
         elif len(consonant_group) > 0:
@@ -91,12 +92,12 @@ def graphems_to_phonems(text):
             elif consonant_group[-1] in VOICELESS_TO_VOICED:
                 new_text += to_voiceless(consonant_group)
             consonant_group = ""
-        if char not in CONSONANTS+[" "]:
+        if char not in CONSONANTS + [" "]:
             new_text += char
 
     if len(consonant_group) > 0:
         new_text += to_voiceless(consonant_group)
-        consonant_group = ""
+
     return new_text
 
 
@@ -132,6 +133,21 @@ def to_voiceless(consonant_group):
         else:
             new_group += consonant
     return new_group
+
+
+def graphems_to_phonems(text):
+    """
+    creates phonetic transcription of text
+
+    :param str text: text to be phonetically transcribed
+    :return: phonetic transcription of text
+    :rtype: str
+    """
+    text = to_supported(text)
+    text = apply_special_rules(text)
+    text = apply_assimilation(text)
+
+    return text
 
 
 def phonems_to_diphones(text):

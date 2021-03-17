@@ -61,7 +61,8 @@ class Interface:
             wrap=tk.WORD,
             fg=text_fg,
             bg=widg_bg,
-            relief="flat"
+            relief="flat",
+            state="normal"
         )
         text_scrollbar = cs.Scrollbar(
             textframe,

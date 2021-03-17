@@ -35,7 +35,10 @@ class Interface:
         self.window = tk.Tk()
         self.window.minsize(200, 100)
         self.window.title("Syntéza řeči")
-        #self.window.iconbitmap("icon.ico")
+        try:
+            self.window.iconbitmap("icon.ico")
+        except:
+            print("Speciální ikona nebude.")
         self.text = scrt.ScrolledText(self.window, width=50, height=15)
         self.text.grid(pady=3, padx=2, sticky="wesn", columnspan=2)
         insertbutton = tk.Button(text="Vložit", command=self.insert_from_clipboard)
