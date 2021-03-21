@@ -30,28 +30,28 @@ print(diphones)
 diphones = diphones.most_common(500)
 diphones = [diphone[0] for diphone in diphones]
 
-unused = diphones
-used = []
+not_found = diphones
+found = []
 final_word_results = {}
-while len(unused) > 0:
-    diphone = unused[0]
-    print(f"{len(unused)} diphones remaining")
+while len(not_found) > 0:
+    diphone = not_found[0]
+    print(f"{len(not_found)} diphones remaining")
     for word in possible_words:
         word_diphones = convert_to_diphones(word)
         if diphone in word_diphones:
             added_by_word = []
             for diphone_from_word in word_diphones:
-                if diphone_from_word in unused:
-                    unused.remove(diphone_from_word)
-                if diphone_from_word not in used:
-                    used.append(diphone_from_word)
+                if diphone_from_word in not_found:
+                    not_found.remove(diphone_from_word)
+                if diphone_from_word not in found:
+                    found.append(diphone_from_word)
                     added_by_word.append(diphone_from_word)
             final_word_results[word] = added_by_word
             break
-    if len(unused) > 0 and unused[0] == diphone:
+    if len(not_found) > 0 and not_found[0] == diphone:
         print(f"didn't find word with diphone {diphone}")
-        unused.pop(0)
-del used, unused
+        not_found.pop(0)
+del found, not_found
 
 result_string = ""
 for word in final_word_results:

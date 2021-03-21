@@ -32,6 +32,7 @@ class Interface:
         be read, instance of tkinter.scrolledtext.ScrolledText
     """
     def __init__(self):
+        self.play_object = None
         self.window = tk.Tk()
         self.window.minsize(200, 100)
         self.window.title("Syntéza řeči")
@@ -54,10 +55,12 @@ class Interface:
         plays text from the self.text widget
         :return: None
         """
+        if self.play_object:
+            self.play_object.stop()
         text_content = self.text.get("1.0", "end")
         print("reading text", text_content)
         diphones = convert_to_diphones(text_content)
-        play_diphones(diphones)
+        self.play_object = play_diphones(diphones)
 
     def insert_from_clipboard(self):
         """
@@ -66,6 +69,7 @@ class Interface:
         """
         clipboard_content = self.window.clipboard_get()
         self.text.insert("insert", clipboard_content)
+
 
 if __name__ == '__main__':
     ui = Interface()

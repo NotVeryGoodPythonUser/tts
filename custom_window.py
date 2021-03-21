@@ -235,7 +235,8 @@ class CustomTk(tk.Tk):
 
     def make_small(self):
         """
-        Minimises the window to contain only icon and two buttons
+        Minimises the window to contain only icon and two buttons or
+        makes the window normal again if minimised
 
         :return: None
         """

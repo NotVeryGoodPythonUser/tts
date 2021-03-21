@@ -32,8 +32,7 @@ class Scrollbar(tk.Frame):
         the slider to fit into the trough
     """
     def __init__(self, master, *, bg="lightgray", fg="darkgray",
-                 width=16, length=100,
-                 command=lambda top, bottom: print("command not specified")):
+                 width=16, length=100, command=None):
         """
         :param tk.Frame master: widget to pack or grid the scrollbar in
         :param str bg: color to fill the trough and background
@@ -44,7 +43,10 @@ class Scrollbar(tk.Frame):
         :param callable command: yview method of widget that should be
             connected to the scrollbar
         """
-        self.command = command
+        if command:
+            self.command = command
+        else:
+            self.command = lambda top, bottom: print("command not specified")
         self.last_set = 0, 1
         super().__init__(master, bg=bg, width=width, height=length)
         self.trough = tk.Frame(self, width=width, height=length - 30)
@@ -137,7 +139,7 @@ class Scrollbar(tk.Frame):
         :return: None
         """
         top, bottom = self.last_set
-        offset = (bottom - top) / 20
+        offset = (bottom - top) / 10
         if top - offset > 0:
             self.command(tk.MOVETO, top - offset)
         else:
@@ -150,10 +152,9 @@ class Scrollbar(tk.Frame):
         :return: None
         """
         top, bottom = self.last_set
-        offset = (bottom - top) / 20
+        offset = (bottom - top) / 10
         if bottom + offset < 1:
             self.command(tk.MOVETO, top + offset)
-
         else:
             self.command(tk.MOVETO, 1 + bottom - top)
 
