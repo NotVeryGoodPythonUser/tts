@@ -54,28 +54,26 @@ def choose_wavs(diphones):
     return wav_names
 
 
-def concatenate_wavs(file_name_list, result_path="sound_output.wav"):
+def concatenate_wavs(file_list, result_path="sound_output.wav"):
     """
     concatenates given wav files
 
-    :param list[str] file_name_list: list or tuple containing paths to
+    :param list[str] file_list: list or tuple containing paths to
         files that should be concatenated
     :param str result_path: path to where the result wav file should be
         stored, default is 'sound_output.wav'
     :return: path to the result wav file
     :rtype: str
     """
-    if len(file_name_list) == 0:
+    if len(file_list) == 0:
         return
     params = None
     all_frames = []
-    nframes = 0
-    for wav_file_name in file_name_list:
+    for wav_file_name in file_list:
         with wave.open(wav_file_name, "rb") as wav_file:
             if not params:
                 params = wav_file.getparams()
             all_frames.append(wav_file.readframes(wav_file.getnframes()))
-            nframes += wav_file.getnframes()
     with wave.open(result_path, "wb") as output_file:
         output_file.setparams(params)
         for frames in all_frames:

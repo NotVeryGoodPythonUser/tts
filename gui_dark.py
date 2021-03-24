@@ -73,11 +73,11 @@ class Interface:
         self.text["yscrollcommand"] = text_scrollbar.set
         text_scrollbar.pack(side=tk.RIGHT, fill="y")
         self.text.pack(side=tk.LEFT, expand=1, fill="both")
-        textframe.grid(columnspan=3)
+        textframe.grid(columnspan=5)
 
         # divider
         tk.Frame(content_frame, height=3, bd=0, bg=win_bg)\
-            .grid(columnspan=3, sticky="we")
+            .grid(columnspan=5, sticky="we")
 
         insertbutton = tk.Button(
             content_frame,
@@ -102,23 +102,55 @@ class Interface:
             overrelief="sunken",
         )
         playbutton.grid(column=2, row=2, sticky="wesn")
-        content_frame.grid_rowconfigure(0, weight=1)
-        content_frame.grid_columnconfigure(0, weight=1)
-        content_frame.grid_columnconfigure(2, weight=1)
-        content_frame.grid_columnconfigure(1, minsize=3)
 
-    def play_text(self):
+        self.stopbutton = tk.Button(
+            content_frame,
+            text="Stop",
+            command=self.stop_playing,
+            bg=widg_bg,
+            fg=widg_fg,
+            bd=2,
+            relief="flat",
+            overrelief="sunken",
+            state=tk.DISABLED
+        )
+        self.stopbutton.grid(column=4, row=2, sticky="wesn")
+        content_frame.grid_rowconfigure(0, weight=1)
+        content_frame.grid_columnconfigure(0, weight=2)
+        content_frame.grid_columnconfigure(1, minsize=3)
+        content_frame.grid_columnconfigure(2, weight=2)
+        content_frame.grid_columnconfigure(3, minsize=3)
+        content_frame.grid_columnconfigure(4, weight=1)
+
+    def stop_playing(self):
         """
-        plays text from the text widget
+        stops playback
 
         :return: None
         """
         if self.play_object:
             self.play_object.stop()
+
+    def play_text(self):
+        """
+        plays text from the self.text widget
+
+        :return: None
+        """
+        def disable_stop_when_done():
+            if self.play_object.is_playing():
+                self.window.after(500, disable_stop_when_done)
+            else:
+                self.stopbutton["state"] = tk.DISABLED
+
+        self.stop_playing()
+        self.stopbutton["state"] = tk.NORMAL
+        print("stopbutton should be normal")
         text_content = self.text.get("1.0", "end")
         print("reading text", text_content)
         diphones = convert_to_diphones(text_content)
         self.play_object = play_diphones(diphones)
+        disable_stop_when_done()
 
     def insert_clipboard(self):
         """

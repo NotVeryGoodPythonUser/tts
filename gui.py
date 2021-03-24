@@ -40,31 +40,56 @@ class Interface:
             self.window.iconbitmap("icon.ico")
         except:
             print("Speciální ikona nebude.")
-        self.text = scrt.ScrolledText(self.window, width=50, height=15)
-        self.text.grid(pady=3, padx=2, sticky="wesn", columnspan=2)
-        insertbutton = tk.Button(text="Vložit", command=self.insert_from_clipboard)
+        self.text = scrt.ScrolledText(self.window, width=50, height=15,
+                                      wrap=tk.WORD)
+        self.text.grid(pady=3, padx=2, sticky="wesn", columnspan=3)
+        insertbutton = tk.Button(text="Vložit",
+                                 command=self.insert_from_clipboard)
         insertbutton.grid(column=0, sticky="wesn", padx=2, pady=1)
-        playbutton = tk.Button(text="Čti!", command=self.playtext)
+        playbutton = tk.Button(text="Čti!", command=self.play_text)
         playbutton.grid(column=1, row=1, sticky="wesn", padx=2, pady=1)
+        self.stopbutton = tk.Button(text="Stop", command=self.stop_playing,
+                                    state=tk.DISABLED)
+        self.stopbutton.grid(column=2, row=1, sticky="wesn", padx=2, pady=1)
         self.window.grid_rowconfigure(0, weight=1)
-        self.window.grid_columnconfigure(0, weight=1)
-        self.window.grid_columnconfigure(1, weight=1)
+        self.window.grid_columnconfigure(0, weight=2)
+        self.window.grid_columnconfigure(1, weight=2)
+        self.window.grid_columnconfigure(2, weight=1)
 
-    def playtext(self):
+    def stop_playing(self):
         """
-        plays text from the self.text widget
+        stops playback
+
         :return: None
         """
         if self.play_object:
             self.play_object.stop()
+
+    def play_text(self):
+        """
+        plays text from the self.text widget
+
+        :return: None
+        """
+        def disable_stop_when_done():
+            if self.play_object.is_playing():
+                self.window.after(500, disable_stop_when_done)
+            else:
+                self.stopbutton["state"] = tk.DISABLED
+
+        self.stop_playing()
+        self.stopbutton["state"] = tk.NORMAL
+        print("stopbutton should be normal")
         text_content = self.text.get("1.0", "end")
         print("reading text", text_content)
         diphones = convert_to_diphones(text_content)
         self.play_object = play_diphones(diphones)
+        disable_stop_when_done()
 
     def insert_from_clipboard(self):
         """
         inserts text from clipboard into self.text widget
+
         :return: None
         """
         clipboard_content = self.window.clipboard_get()
